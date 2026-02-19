@@ -1,5 +1,5 @@
 import { Grid, GridItem, Stack } from "@chakra-ui/react"
-import { ColorModeButton } from "./components/ui/color-mode"
+import Nav from "./components/Nav"
 
 
 function App() {
@@ -13,8 +13,7 @@ function App() {
       }
     }>
       <GridItem area="nav" bg="aliceblue">
-        <ColorModeButton></ColorModeButton>
-          NAV
+       <Nav></Nav>
       </GridItem>
       <Stack hideBelow={"md"}>
         <GridItem area="aside" bg='gold' >
