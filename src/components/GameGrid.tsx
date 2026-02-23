@@ -2,9 +2,12 @@
 import { SimpleGrid, Spinner, Text } from '@chakra-ui/react'
 import GameCard from './GameCard'
 import useGame from '@/services/hooks/useGame'
-
-const GameGrid = () => {
-   const {data:games, isLoading, error} = useGame()
+import { FC } from 'react'
+type Props = {
+  genre: string | null
+}
+const GameGrid: FC<Props> = ({genre}) => {
+   const {data:games, isLoading, error} = useGame(genre)
     
   return (
     

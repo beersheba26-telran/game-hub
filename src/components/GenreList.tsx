@@ -1,7 +1,11 @@
 import useGenre from "@/services/hooks/useGenre";
 import { Avatar, Button, HStack, List, Spinner, Text } from "@chakra-ui/react";
-
-const GenreList = () => {
+import { FC } from "react";
+type Props = {
+    onGenreSelect: (genre: string) => void
+    genre: string | null
+}
+const GenreList: FC<Props> = ({onGenreSelect, genre}) => {
   const {data:genres, isLoading} = useGenre();
   
   return (
@@ -23,8 +27,9 @@ const GenreList = () => {
                   height="auto"
                   whiteSpace="normal"
                   textAlign="left"
+                  onClick={() => onGenreSelect(g.slug)}
                 >
-                  <Text maxW="10vw" lineHeight="1.2" fontWeight={"normal"}>
+                  <Text maxW="10vw" lineHeight="1.2" fontWeight={g.slug==genre? "bold":"normal"}>
                     {g.name}
                   </Text>
                 </Button>
