@@ -1,5 +1,5 @@
 import React from 'react'
-import { Badge, Card, Image, Stack} from '@chakra-ui/react'
+import { Badge, Card, HStack, Image, Stack, Text} from '@chakra-ui/react'
 import { Game } from '@/models/fetch-types'
 import StarsRater from './StarsRater'
 interface Props {
@@ -15,15 +15,21 @@ const GameCard: React.FC<Props> = ({game}) => {
       <Card.Body gap={0}>
         <Card.Title>{game.name}</Card.Title>
       </Card.Body>
-      <Card.Footer gap={2} >
-        <Stack flexDirection={{
-            base: 'column',
-            sm: 'row',
-            md: 'column'
-        }}>
-            <Badge {...getBudgeStyle(game.metacritic)}>{game.metacritic}</Badge>
-            <StarsRater rate={game.rating}/>
-        </Stack>
+      <Card.Footer gap={2} marginTop = {{
+        sm: "-30px",
+        md: "0px"
+      }}>
+        <HStack justifyContent={'space-between'}>
+            <Stack flexDirection={{
+                base: 'column',
+                sm: 'row',
+                md: 'column'
+            }}>
+                <Badge {...getBudgeStyle(game.metacritic)}>{game.metacritic}</Badge>
+                <StarsRater rate={game.rating}/>
+            </Stack>
+            <Text marginLeft={{base: 10, sm: 0, md:20}}>{game.parent_platforms.map(p => p.platform.slug).join("; ")}</Text>
+        </HStack>
       </Card.Footer>
      
     </Card.Root>
