@@ -28,7 +28,7 @@ const GameCard: React.FC<Props> = ({game}) => {
                 <Badge {...getBudgeStyle(game.metacritic)}>{game.metacritic}</Badge>
                 <StarsRater rate={game.rating}/>
             </Stack>
-            <Text marginLeft={{base: 10, sm: 0, md:20}}>{game.parent_platforms.map(p => p.platform.slug).join("; ")}</Text>
+            <Text marginLeft={{base: 10, sm: 5, md:20}}>{game.parent_platforms.map(p => p.platform.slug).join("; ")}</Text>
         </HStack>
       </Card.Footer>
      

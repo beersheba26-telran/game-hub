@@ -7,7 +7,7 @@ import GameCard from './GameCard'
 const GameGrid = () => {
     const [games, setGames] = React.useState<Game[]>([])
     React.useEffect(() => {
-        apiClient.get<FetchResponse>('games').then(res => setGames(res.data.results))
+        apiClient.get<FetchResponse<Game>>('games').then(res => setGames(res.data.results))
     },[])
     
   return (
