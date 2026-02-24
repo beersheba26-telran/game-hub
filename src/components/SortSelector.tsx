@@ -21,7 +21,7 @@ const SortSelector: FC<Props> = ({ sortOption, onSortSelect }) => {
             <Button
               variant="outline"
               size={{ base: "xs", sm: "sm" }}
-              marginBottom={3}
+              marginBottom={{ base: 2, sm: 0, md: 3 }}
               width="auto"
               minW={0}
               maxW={{ base: "116px", sm: "none" }}

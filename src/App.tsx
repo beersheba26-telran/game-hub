@@ -39,7 +39,7 @@ function App() {
       </GridItem>
       <GridItem area="main">
         <HStack
-          mb={2}
+          mb={{ base: 2, sm: 0, md: 2 }}
           alignItems="flex-start"
           width="100%"
           gap={1}
