@@ -45,7 +45,10 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
                   <Menu.Item
                     key={p?.id}
                     value={p.slug || ""}
-                    onClick={() => {onPlatformSelect(p); setIsOpen(!isOpen)}}
+                    onClick={() => {
+                      onPlatformSelect(p);
+                      setIsOpen(!isOpen);
+                    }}
                   >
                     {p?.name || "Platforms"}
                   </Menu.Item>

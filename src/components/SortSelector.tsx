@@ -41,7 +41,10 @@ const SortSelector: FC<Props> = ({ sortOption, onSortSelect }) => {
                   <Menu.Item
                     key={so?.id}
                     value={so.value || ""}
-                    onClick={() => {onSortSelect(so); setIsOpen(!isOpen)}}
+                    onClick={() => {
+                      onSortSelect(so);
+                      setIsOpen(!isOpen);
+                    }}
                   >
                     {so?.name || "No Ordering"}
                   </Menu.Item>

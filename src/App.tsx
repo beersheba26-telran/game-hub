@@ -21,7 +21,6 @@ function App() {
         base: '"nav" "main"',
         md: '"nav nav" "aside main"',
       }}
-      templateColumns={{ md: "240px 1fr" }}
       gap={{ base: 2, md: 4 }}
       px={{ base: 3, md: 4 }}
       py={{ base: 2, md: 3 }}

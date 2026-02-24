@@ -50,7 +50,10 @@ const GenreSelector: FC<Props> = ({ genre, onGenreSelect }) => {
                   <Menu.Item
                     key={g?.id}
                     value={g.slug || ""}
-                    onClick={() => {onGenreSelect(g.slug); setIsOpen(!isOpen)}}
+                    onClick={() => {
+                      onGenreSelect(g.slug);
+                      setIsOpen(!isOpen);
+                    }}
                   >
                     {g?.name || "Genres"}
                   </Menu.Item>
