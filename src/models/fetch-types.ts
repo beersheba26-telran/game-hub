@@ -18,6 +18,11 @@ export type Genre = {
   games_count: number;
   image_background: string;
 };
+export type ParentPlatform = {
+  id: number,
+  slug: string | null,
+  name: string
+}
 
 export type FetchResponse<T> = {
   results: T[];
