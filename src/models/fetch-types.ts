@@ -14,7 +14,7 @@ export type Game = {
 export type Genre = {
   id: number;
   name: string;
-  slug: string;
+  slug: string | null;
   games_count: number;
   image_background: string;
 };

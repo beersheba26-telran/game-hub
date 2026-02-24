@@ -1,17 +1,18 @@
 import useGenre from "@/services/hooks/useGenre";
 import { Avatar, Button, HStack, List, Spinner, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 type Props = {
-    onGenreSelect: (genre: string) => void
+    onGenreSelect: (genre: string | null) => void
     genre: string | null
 }
 const GenreList: FC<Props> = ({onGenreSelect, genre}) => {
   const {data:genres, isLoading} = useGenre();
-  
+ useMemo(() =>genres[0]?.id >= 0 && genres.unshift({id: -1,games_count: 0,image_background:"", name: "All genres", slug: null}), [genres])
   return (
     <>
         {isLoading && <Spinner></Spinner>}
         <List.Root listStyle="none" maxHeight="85vh" overflow="auto" width="15vw">
+
           {genres.map((g) => (
             <List.Item key={g.id}>
               <HStack padding={2}>

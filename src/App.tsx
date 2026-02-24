@@ -21,7 +21,7 @@ function App() {
       </GridItem>
       <Stack hideBelow={"md"}>
         <GridItem area="aside"  >
-          <GenreList genre={gameQuery.genreSlug} onGenreSelect={(genre: string) => setGameQuery({...gameQuery, genreSlug:genre})}/>
+          <GenreList genre={gameQuery.genreSlug} onGenreSelect={(genre: string | null) => setGameQuery({...gameQuery, genreSlug:genre})}/>
         </GridItem>
       </Stack>
        <GridItem area="main" >
