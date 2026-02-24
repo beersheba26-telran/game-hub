@@ -1,20 +1,16 @@
-import { ParentPlatform } from "@/models/fetch-types";
-import usePlatform from "@/services/hooks/useParentPlatforms";
+import { SortOption } from "@/models/SortOption";
+import useSortOption from "@/services/hooks/useSortOption";
 import { Button, Menu, Portal, Spinner, Text } from "@chakra-ui/react";
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 type Props = {
-  parentPlatform: ParentPlatform | null;
-  onPlatformSelect: (platform: ParentPlatform | null) => void;
+  sortOption: SortOption | null;
+  onSortSelect: (sort: SortOption | null) => void;
 };
-const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
-  const { error, data: platforms, isLoading } = usePlatform();
-  useMemo(
-    () =>
-      platforms[0]?.id >= 0 &&
-      platforms.unshift({ id: -1, slug: "platforms", name: "All platforms" }),
-    [platforms],
-  );
+const isLoading = false;
+const error = "";
+const SortSelector: FC<Props> = ({ sortOption, onSortSelect }) => {
+  const sortOptions = useSortOption();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
@@ -28,12 +24,12 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
               marginBottom={3}
               width="auto"
               minW={0}
-              maxW={{ base: "122px", sm: "none" }}
+              maxW={{ base: "116px", sm: "none" }}
               px={{ base: 1.5, sm: 3 }}
               onClick={() => setIsOpen(!isOpen)}
             >
               <Text truncate maxW="100%">
-                {parentPlatform?.name || "Platforms"}
+                {sortOption?.name || "No Ordering"}
               </Text>
               {isOpen ? <FaChevronUp /> : <FaChevronDown />}
             </Button>
@@ -41,13 +37,13 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
           <Portal>
             <Menu.Positioner>
               <Menu.Content>
-                {platforms.map((p) => (
+                {sortOptions.map((so) => (
                   <Menu.Item
-                    key={p?.id}
-                    value={p.slug || ""}
-                    onClick={() => {onPlatformSelect(p); setIsOpen(!isOpen)}}
+                    key={so?.id}
+                    value={so.value || ""}
+                    onClick={() => {onSortSelect(so); setIsOpen(!isOpen)}}
                   >
-                    {p?.name || "Platforms"}
+                    {so?.name || "No Ordering"}
                   </Menu.Item>
                 ))}
               </Menu.Content>
@@ -59,4 +55,4 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
   );
 };
 
-export default PlatformSelector;
+export default SortSelector;

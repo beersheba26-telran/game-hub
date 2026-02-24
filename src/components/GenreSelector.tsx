@@ -1,19 +1,24 @@
-import { ParentPlatform } from "@/models/fetch-types";
-import usePlatform from "@/services/hooks/useParentPlatforms";
+import useGenre from "@/services/hooks/useGenre";
 import { Button, Menu, Portal, Spinner, Text } from "@chakra-ui/react";
 import { FC, useMemo, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 type Props = {
-  parentPlatform: ParentPlatform | null;
-  onPlatformSelect: (platform: ParentPlatform | null) => void;
+  onGenreSelect: (genre: string | null) => void;
+  genre: string | null;
 };
-const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
-  const { error, data: platforms, isLoading } = usePlatform();
+const GenreSelector: FC<Props> = ({ genre, onGenreSelect }) => {
+  const { error, data: genres, isLoading } = useGenre();
   useMemo(
     () =>
-      platforms[0]?.id >= 0 &&
-      platforms.unshift({ id: -1, slug: "platforms", name: "All platforms" }),
-    [platforms],
+      genres[0]?.id >= 0 &&
+      genres.unshift({
+        id: -1,
+        games_count: 0,
+        image_background: "",
+        name: "All genres",
+        slug: null,
+      }),
+    [genres],
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
@@ -28,12 +33,12 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
               marginBottom={3}
               width="auto"
               minW={0}
-              maxW={{ base: "122px", sm: "none" }}
+              maxW={{ base: "112px", sm: "none" }}
               px={{ base: 1.5, sm: 3 }}
               onClick={() => setIsOpen(!isOpen)}
             >
               <Text truncate maxW="100%">
-                {parentPlatform?.name || "Platforms"}
+                {genre || "Genres"}
               </Text>
               {isOpen ? <FaChevronUp /> : <FaChevronDown />}
             </Button>
@@ -41,13 +46,13 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
           <Portal>
             <Menu.Positioner>
               <Menu.Content>
-                {platforms.map((p) => (
+                {genres.map((g) => (
                   <Menu.Item
-                    key={p?.id}
-                    value={p.slug || ""}
-                    onClick={() => {onPlatformSelect(p); setIsOpen(!isOpen)}}
+                    key={g?.id}
+                    value={g.slug || ""}
+                    onClick={() => {onGenreSelect(g.slug); setIsOpen(!isOpen)}}
                   >
-                    {p?.name || "Platforms"}
+                    {g?.name || "Genres"}
                   </Menu.Item>
                 ))}
               </Menu.Content>
@@ -59,4 +64,4 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
   );
 };
 
-export default PlatformSelector;
+export default GenreSelector;
