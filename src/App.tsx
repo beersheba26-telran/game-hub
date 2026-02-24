@@ -4,6 +4,7 @@ import GameGrid from "./components/GameGrid"
 import GenreList from "./components/GenreList"
 import { useState } from "react"
 import { GameQueryParams } from "./models/GameQueryParams"
+import PlatformSelector from "./components/PlatformSelector"
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         </GridItem>
       </Stack>
        <GridItem area="main" >
+        <PlatformSelector parentPlatformSlug={gameQuery.parentPlatformSlug} onPlatformSelect={(platform: string | null) => setGameQuery({...gameQuery, parentPlatformSlug: platform})}></PlatformSelector>
         <GameGrid gameQuery={gameQuery}/>
       </GridItem>
       

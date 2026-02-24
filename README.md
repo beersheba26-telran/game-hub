@@ -1,6 +1,5 @@
-# GenreList
-## Chakra component List
+# PlatformSelector
+## Chakra component Menu
 ### List.Item
-Chakra Avatar with genre image
-Chakra Button with  genre name
-Most likly there should be vertical scrolling
+Button with name of either "Platforms" or selected platform
+Menu items are in accordance to quering all parent platforms from RAWG
