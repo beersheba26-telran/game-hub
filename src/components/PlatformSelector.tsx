@@ -1,8 +1,8 @@
 import { ParentPlatform } from "@/models/fetch-types";
 import usePlatform from "@/services/hooks/useParentPlatforms";
-import { Button, Menu, Portal, Spinner, Text } from "@chakra-ui/react";
-import { FC, useMemo, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { Spinner} from "@chakra-ui/react";
+import { FC, useMemo} from "react";
+import MenuSelector from "./MenuSelector";
 type Props = {
   parentPlatform: ParentPlatform | null;
   onPlatformSelect: (platform: ParentPlatform | null) => void;
@@ -15,50 +15,16 @@ const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
       platforms.unshift({ id: -1, slug: "platforms", name: "All platforms" }),
     [platforms],
   );
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <>
       {isLoading && <Spinner></Spinner>}
       {!error && (
-        <Menu.Root>
-          <Menu.Trigger asChild>
-            <Button
-              variant="outline"
-              size={{ base: "xs", sm: "sm" }}
-              marginBottom={{ base: 2, sm: 0, md: 3 }}
-              width="auto"
-              minW={0}
-              maxW={{ base: "122px", sm: "none" }}
-              px={{ base: 1.5, sm: 3 }}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <Text truncate maxW="100%">
-                {parentPlatform?.name || "Platforms"}
-              </Text>
-              {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-            </Button>
-          </Menu.Trigger>
-          <Portal>
-            <Menu.Positioner>
-              <Menu.Content>
-                {platforms.map((p) => (
-                  <Menu.Item
-                    key={p?.id}
-                    value={p.slug || ""}
-                    onClick={() => {
-                      onPlatformSelect(p);
-                      setIsOpen(!isOpen);
-                    }}
-                  >
-                    {p?.name || "Platforms"}
-                  </Menu.Item>
-                ))}
-              </Menu.Content>
-            </Menu.Positioner>
-          </Portal>
-        </Menu.Root>
-      )}
-    </>
+        <MenuSelector items={platforms.map(p => ({value: p.slug, name: p.name}))} 
+        onItemSelect={item => onPlatformSelect(platforms.find(p => p.slug == item.value)!)}
+        selectedItemValue={parentPlatform?.slug || null} defaultName="Platforms"></MenuSelector>
+   
+       )}
+     </>
   );
 };
 
