@@ -1,12 +1,19 @@
 import { HStack, Image } from "@chakra-ui/react";
 import logo from "/image.png";
-import React from "react";
+import { FC } from "react";
 import { ColorModeButton } from "./ui/color-mode";
+import SearchBar from "./SearchBar";
 
-const Nav: React.FC = () => {
+interface Props {
+  onSubmitText: (text: string) => void;
+}
+const Nav: FC<Props> = ({ onSubmitText }) => {
   return (
-    <HStack justifyContent={"space-between"} px={2} py={1}>
+    <HStack justifyContent="space-between" width="100%"  gap={2}>
       <Image src={logo} boxSize={"10"} />
+      <SearchBar
+        onSubmitSearchText={(text: string) => onSubmitText(text)}
+      ></SearchBar>
       <ColorModeButton />
     </HStack>
   );

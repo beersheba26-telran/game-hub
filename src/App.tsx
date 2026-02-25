@@ -25,8 +25,9 @@ function App() {
       px={{ base: 3, md: 4 }}
       py={{ base: 2, md: 3 }}
     >
-      <GridItem area="nav" bg="aliceblue">
-        <Nav></Nav>
+      <GridItem area="nav" >
+         <Nav onSubmitText={(text: string) => {setGameQuery({...gameQuery,
+         searchStr: text}) }}></Nav>
       </GridItem>
       <GridItem area="aside" hideBelow={"md"}>
         <GenreList

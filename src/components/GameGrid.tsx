@@ -26,8 +26,8 @@ const GameGrid: FC<Props> = ({ gameQuery }) => {
           }}
           columnGap={5}
           rowGap={12}
-          maxHeight={{ base: "none", md: "80vh" }}
-          overflowY={{ base: "visible", md: "auto" }}
+          maxHeight="80vh"
+          overflowY="auto"
           overflowX="hidden"
           padding={{
             base: 4,
