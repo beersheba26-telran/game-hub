@@ -38,7 +38,7 @@ const MenuSelector: FC<Props> = ({onItemSelect, items, selectedItemValue, defaul
                         value={item.name || ""}
                         onClick={() => {
                           onItemSelect(item);
-                          setIsOpen(!isOpen);
+                          setIsOpen(false);
                         }}
                       >
                         {item?.name || defaultName}
