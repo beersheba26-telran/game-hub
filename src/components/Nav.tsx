@@ -9,8 +9,16 @@ interface Props {
 }
 const Nav: FC<Props> = ({ onSubmitText }) => {
   return (
-    <HStack justifyContent="space-between" width="100%"  gap={2}>
-      <Image src={logo} boxSize={"10"} />
+    <HStack justifyContent="flex-start" width={{
+      base: "90%",
+      sm: "100%"
+    }}  gap={
+      {
+        base: 0,
+        sm: 2
+      }
+    }>
+      <Image src={logo} boxSize={"8"} />
       <SearchBar
         onSubmitSearchText={(text: string) => onSubmitText(text)}
       ></SearchBar>

@@ -7,7 +7,10 @@ type Props = {
 const SearchBar:FC<Props> = ({onSubmitSearchText}) => {
     const inputElement = useRef<HTMLInputElement>(null)
   return (
-    <Box as="form" width="100%" onSubmit={event => {
+    <Box as="form" width={{
+        base: "80%",
+        sm: "100%"
+    }} onSubmit={event => {
         event.preventDefault();
         onSubmitSearchText(inputElement.current?.value ?? "")
     }}>

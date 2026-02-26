@@ -9,12 +9,6 @@ type Props = {
 };
 const PlatformSelector: FC<Props> = ({ parentPlatform, onPlatformSelect }) => {
   const { error, data: platforms, isLoading } = usePlatform();
-  useMemo(
-    () =>
-      platforms[0]?.id >= 0 &&
-      platforms.unshift({ id: -1, slug: "platforms", name: "All platforms" }),
-    [platforms],
-  );
   return (
     <>
       {isLoading && <Spinner></Spinner>}

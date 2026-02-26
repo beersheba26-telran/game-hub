@@ -7,7 +7,6 @@ type Props = {
 }
 const GenreList: FC<Props> = ({onGenreSelect, genre}) => {
   const {data:genres, isLoading} = useGenre();
- useMemo(() =>genres[0]?.id >= 0 && genres.unshift({id: -1,games_count: 0,image_background:"", name: "All genres", slug: null}), [genres])
  
  return (
     <>
