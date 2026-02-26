@@ -33,7 +33,7 @@ function App() {
         <GenreList
           genre={gameQuery.genreSlug}
           onGenreSelect={(genre: string | null) =>
-            setGameQuery({ ...gameQuery, genreSlug: genre })
+            gameQuery.genreSlug != genre && setGameQuery({ ...gameQuery, genreSlug: genre })
           }
         />
       </GridItem>
@@ -48,21 +48,23 @@ function App() {
           <Stack hideFrom={"md"} minW={0}>
             <GenreSelector
               genre={gameQuery.genreSlug}
-              onGenreSelect={(genre: string | null) =>
-                setGameQuery({ ...gameQuery, genreSlug: genre })
+              onGenreSelect={(genre: string | null) => {
+                gameQuery.genreSlug != genre && setGameQuery({ ...gameQuery, genreSlug: genre })
+              }
+                
               }
             ></GenreSelector>
           </Stack>
           <PlatformSelector
             parentPlatform={gameQuery.parentPlatform}
             onPlatformSelect={(platform: ParentPlatform | null) =>
-              setGameQuery({ ...gameQuery, parentPlatform: platform })
+              gameQuery.parentPlatform?.slug != platform?.slug && setGameQuery({ ...gameQuery, parentPlatform: platform })
             }
           ></PlatformSelector>
           <SortSelector
             sortOption={gameQuery.ordering}
             onSortSelect={(sort: SortOption | null) =>
-              setGameQuery({ ...gameQuery, ordering: sort })
+              gameQuery.ordering?.value != sort?.value && setGameQuery({ ...gameQuery, ordering: sort })
             }
           />
         </HStack>
