@@ -11,8 +11,8 @@ type Props = {
 const MenuSelector: FC<Props> = ({onItemSelect, items, selectedItemValue, defaultName}) => {
      const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
-            <Menu.Root>
-              <Menu.Trigger asChild>
+            <Menu.Root onOpenChange={(details) => setIsOpen(details.open)}>
+              <Menu.Trigger asChild >
                 <Button
                   variant="outline"
                   size={{ base: "xs", sm: "sm" }}
@@ -21,7 +21,6 @@ const MenuSelector: FC<Props> = ({onItemSelect, items, selectedItemValue, defaul
                   minW={0}
                   maxW={{ base: "112px", sm: "none" }}
                   px={{ base: 1.5, sm: 3 }}
-                  onClick={() => setIsOpen(!isOpen)}
                 >
                   <Text truncate maxW="100%">
                     {selectedItemValue || defaultName}
@@ -38,7 +37,6 @@ const MenuSelector: FC<Props> = ({onItemSelect, items, selectedItemValue, defaul
                         value={item.name || ""}
                         onClick={() => {
                           onItemSelect(item);
-                          setIsOpen(false);
                         }}
                       >
                         {item?.name || defaultName}
