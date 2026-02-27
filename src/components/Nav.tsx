@@ -4,10 +4,8 @@ import { FC } from "react";
 import { ColorModeButton } from "./ui/color-mode";
 import SearchBar from "./SearchBar";
 
-interface Props {
-  onSubmitText: (text: string) => void;
-}
-const Nav: FC<Props> = ({ onSubmitText }) => {
+
+const Nav: FC = () => {
   return (
     <HStack justifyContent="flex-start" width={{
       base: "90%",
@@ -19,9 +17,7 @@ const Nav: FC<Props> = ({ onSubmitText }) => {
       }
     }>
       <Image src={logo} boxSize={"8"} />
-      <SearchBar
-        onSubmitSearchText={(text: string) => onSubmitText(text)}
-      ></SearchBar>
+      <SearchBar/>
       <ColorModeButton />
     </HStack>
   );

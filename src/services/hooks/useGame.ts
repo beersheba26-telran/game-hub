@@ -1,9 +1,10 @@
 import { Game } from "@/models/fetch-types";
 import useData from "./useData";
-import { GameQueryParams } from "@/models/GameQueryParams";
-export default function useGame(gameQuery: GameQueryParams): {data: Game[], isLoading: boolean, error:string} {
-    return useData<Game>("games", {params: {genres: gameQuery.genreSlug,
-         parent_platforms: gameQuery.parentPlatform?.id == -1 ? null :
-          gameQuery.parentPlatform?.id,ordering: gameQuery.ordering?.value , search: gameQuery.searchStr},
-        },[gameQuery]);
+import useGameQuery from "@/state-managemenr/store";
+export default function useGame(): {data: Game[], isLoading: boolean, error:string} {
+    const {genreSlug,parentPlatform, ordering, searchStr } = useGameQuery()
+    return useData<Game>("games", {params: {genres: genreSlug,
+         parent_platforms: parentPlatform?.id == -1 ? null :
+          parentPlatform?.id,ordering: ordering?.value , search: searchStr},
+        },[genreSlug,parentPlatform, ordering, searchStr]);
 }

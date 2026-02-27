@@ -1,20 +1,18 @@
 import useGenre from "@/services/hooks/useGenre";
-import { Button, Menu, Portal, Spinner, Text } from "@chakra-ui/react";
-import { FC, useMemo, useState } from "react";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import {  Spinner} from "@chakra-ui/react";
+import { FC} from "react";
 import MenuSelector from "./MenuSelector";
-type Props = {
-  onGenreSelect: (genre: string | null) => void;
-  genre: string | null;
-};
-const GenreSelector: FC<Props> = ({ genre, onGenreSelect }) => {
+import useGameQuery from "@/state-managemenr/store";
+
+const GenreSelector: FC = () => {
   const { error, data: genres, isLoading } = useGenre();
-  
+  const setGenre = useGameQuery(s => s.setGenre)
+  const genre = useGameQuery(s => s.genreSlug)
   return (
     <>
       {isLoading && <Spinner></Spinner>}
       {!error && (
-        <MenuSelector onItemSelect={item => onGenreSelect(item.value)}
+        <MenuSelector onItemSelect={item => setGenre(item.value)}
          items={genres.map(g => ({value: g.slug, name: g.name}))} defaultName="Genres"
           selectedItemValue={genre}/>
     
