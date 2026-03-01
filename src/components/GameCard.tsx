@@ -10,12 +10,12 @@ const GameCard: React.FC<Props> = ({ game }) => {
     <Card.Root overflow="hidden" width="100%" minW={0}>
       <Image
         width="100%"
-        aspectRatio={{ base: 16 / 9, sm: 21 / 10, md: 16 / 9 }}
+        aspectRatio={{ base: 16 / 10, sm: 21 / 9, md: 16 / 9 }}
         objectFit={"cover"}
         src={game.background_image}
         alt={`image for game ${game.name}`}
       />
-      <Card.Body gap={0} pb={1}>
+      <Card.Body gap={0} pb={1}  marginTop={"-20px"}  >
         <Card.Title lineClamp={2}>{game.name}</Card.Title>
       </Card.Body>
       <Card.Footer gap={1} pt={0}>

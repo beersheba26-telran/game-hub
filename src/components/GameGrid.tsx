@@ -23,7 +23,7 @@ const GameGrid: FC = () => {
   } = useGame();
 
   return (
-    <VStack direction="column" height="80vh" overflow="hidden">
+    <VStack  height="80vh" overflow="hidden">
       {isLoading && <Spinner></Spinner>}
       {!!error ? (
         <Text color={"red"} fontSize="2rem" fontWeight={"bold"}>
@@ -57,7 +57,7 @@ const GameGrid: FC = () => {
               count={800000}
               pageSize={20}
               
-              siblingCount={3}
+             
             >
               <ButtonGroup variant="outline" size="sm">
                 <Pagination.PrevTrigger

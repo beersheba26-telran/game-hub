@@ -25,5 +25,6 @@ export type ParentPlatform = {
 }
 
 export type FetchResponse<T> = {
+  count: number;
   results: T[];
 };
