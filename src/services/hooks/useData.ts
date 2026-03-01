@@ -9,7 +9,9 @@ export default function useData<T>(endpoint: string, config?: AxiosRequestConfig
    config && queryKey.push(config)
     const queryRes = useQuery<T[], AxiosError>({
     queryKey,
-    queryFn: () => apiClient.get<FetchResponse<T>>(endpoint, config).then(res => res.data.results)
+    queryFn: () => apiClient.get<FetchResponse<T>>(endpoint, config).then(res => res.data.results),
+    staleTime: 3600_000,
+    gcTime: 1000_000
    })
    
     return {data:queryRes.data || [], isLoading: queryRes.isLoading, error: queryRes.error?.message || ""};
