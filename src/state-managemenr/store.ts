@@ -6,6 +6,8 @@ type GameQuery = {
   parentPlatform: ParentPlatform | null;
   searchStr: string | null;
   ordering: SortOption | null;
+  page: number;
+  setPage: (page: number) => void;
   setGenre: (genreSlug: string | null)=> void;
   setParentPlatform: (parentPlatform: ParentPlatform | null)=>void;
   setSearchStr: (searchStr: string | null) => void;
@@ -17,10 +19,12 @@ const useGameQuery = create<GameQuery>(set => ({
     parentPlatform: null,
     searchStr: null,
     ordering: null,
-    setGenre: (genreSlug => set((state) => state.genreSlug == genreSlug ? state : {genreSlug})),
+    page: 1,
+    setPage: (page => set(state => state.page == page ? state : {page})),
+    setGenre: (genreSlug => set((state) => state.genreSlug == genreSlug ? state : {genreSlug, page: 1})),
     setParentPlatform: (parentPlatform => set(state => state.parentPlatform?.slug ==
-         parentPlatform?.slug ? state : {parentPlatform})),
-    setSearchStr: (searchStr => set(state => state.searchStr == searchStr? state : {searchStr})) ,
-    setOrdering: (ordering => set(state => state.ordering?.value == ordering?.value ? state : {ordering}))    
+         parentPlatform?.slug ? state : {parentPlatform, page: 1})),
+    setSearchStr: (searchStr => set(state => state.searchStr == searchStr? state : {searchStr, page: 1})) ,
+    setOrdering: (ordering => set(state => state.ordering?.value == ordering?.value ? state : {ordering, page: 1}))    
 })) 
 export default useGameQuery

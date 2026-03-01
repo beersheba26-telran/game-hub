@@ -12,16 +12,18 @@ import {
 import GameCard from "./GameCard";
 import useGame from "@/services/hooks/useGame";
 import { FC } from "react";
-import useGameQuery from "@/state-managemenr/store";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import useGameQuery from "@/state-managemenr/store";
 
 const GameGrid: FC = () => {
   const {
     data: games,
     isLoading,
-    error
+    error,
+    count
   } = useGame();
-
+  const page = useGameQuery(s => s.page)
+  const setPage = useGameQuery(s => s.setPage)
   return (
     <VStack  height="80vh" overflow="hidden">
       {isLoading && <Spinner></Spinner>}
@@ -54,9 +56,10 @@ const GameGrid: FC = () => {
           </Box>
           <HStack justifyContent="center" mt={4} pb={4}>
             <Pagination.Root
-              count={800000}
+              count={count}
               pageSize={20}
-              
+              page={page}
+              onPageChange={(details) => setPage(details.page)}
              
             >
               <ButtonGroup variant="outline" size="sm">
