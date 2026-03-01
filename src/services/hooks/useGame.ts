@@ -6,5 +6,5 @@ export default function useGame(): {data: Game[], isLoading: boolean, error:stri
     return useData<Game>("games", {params: {genres: genreSlug,
          parent_platforms: parentPlatform?.id == -1 ? null :
           parentPlatform?.id,ordering: ordering?.value , search: searchStr},
-        },[genreSlug,parentPlatform, ordering, searchStr]);
+        });
 }
